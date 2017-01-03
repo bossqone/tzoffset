@@ -2,7 +2,7 @@
   "name": "tzoffset",
   "version": "1.0.0",
   "description": "",
-  "main": "test.js",
+  "main": "generator.js",
   "scripts": {
     "start": "node ./test.js"
   },
