@@ -2,7 +2,7 @@ const moment = require("moment-timezone");
 const _ = require("lodash");
 
 
-module.exports = function (start, end, timezone) {
+module.exports = function (field, start, end, timezone) {
 
     // get range as moments
     start = moment(start);
@@ -33,13 +33,13 @@ module.exports = function (start, end, timezone) {
         const offset = boundary.offset * 60 * 1000; // minutes -> milliseconds
 
         if (boundaries.length == 0) {
-            return { $subtract: ["$time", offset] };
+            return { $subtract: [field, offset] };
         }
 
         return {
             $cond: {
-                if: { $lt: ["$time", new Date(until)] },
-                then: { $subtract: ["$time", offset] },
+                if: { $lt: [field, new Date(until)] },
+                then: { $subtract: [field, offset] },
                 else: getCondition(boundaries)
             }
         }
